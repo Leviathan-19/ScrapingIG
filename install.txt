@@ -3,5 +3,10 @@ Librerias a instalar para el correcto funcionamiento del proyecto:
 python -m venv venv
 venv\Scripts\activate
 
-pip install apify-client pandas openpyxl
+pip install apify-client pandas openpyxl python-dotenv
 pip install python-dotenv
+pip freeze > requirements.txt
+pip install --upgrade apify-client
+O solo:
+
+pip install -r requirements.txt
