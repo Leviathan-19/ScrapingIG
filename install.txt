@@ -1,0 +1,7 @@
+Librerias a instalar para el correcto funcionamiento del proyecto:
+
+python -m venv venv
+venv\Scripts\activate
+
+pip install apify-client pandas openpyxl
+pip install python-dotenv
