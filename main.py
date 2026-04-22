@@ -46,7 +46,7 @@ def extraer_posts(username, client, limite=10):
         "requestDelay": 5,
         "useProxy": True
     }
-    
+
     try:
         actor_call = client.actor("iron-crawler/instagram-posts").call(run_input=run_input_posts)
         dataset_items = list(client.dataset(actor_call["defaultDatasetId"]).iterate_items())
@@ -131,15 +131,14 @@ def main():
     if not validacion["existe"] or validacion.get("es_privada", False):
         return
     
-    # Mostrar opciones ampliadas
     print("\nOpciones de extraccion:")
-    print("1 - Los 10 primeros posts")
-    print("2 - Los 10 ultimos posts")
-    print("3 - Todos los posts (puede tomar varios minutos)")
+    print("1 - Los 10 primeros posts (mas antiguos)")
+    print("2 - Los 10 ultimos posts (mas recientes)")
     opcion = input("Elige una opcion: ").strip()
     
     if opcion == "1":
-        limite_temporal = 1000  #limite del cual se hará el conteo para los 10 primeros ó ultimos
+        limite_temporal = 200
+        print(f"Extrayendo hasta {limite_temporal} posts para luego seleccionar los 10 mas antiguos...")
         resultado_temporal = extraer_posts(username, client, limite_temporal)
         if not resultado_temporal["exito"]:
             print(resultado_temporal["mensaje"])
@@ -147,15 +146,9 @@ def main():
         
         posts_ordenados = sorted(resultado_temporal["posts"], key=lambda x: x["fecha"] if x["fecha"] else "")
         posts_final = posts_ordenados[:10]
-        
         resultado_posts = {"exito": True, "posts": posts_final}
     elif opcion == "2":
         limite = 10
-        resultado_posts = extraer_posts(username, client, limite)
-    elif opcion == "3":
-        
-        limite = 1000
-        print(f"ADVERTENCIA: Se intentaran extraer hasta {limite} posts. Esto puede tomar varios minutos dependiendo de la cantidad de publicaciones.")
         resultado_posts = extraer_posts(username, client, limite)
     else:
         print("Opcion no valida. Saliendo...")
