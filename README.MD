@@ -28,4 +28,5 @@ a un archivo.xlsx que se guardará en la ruta seleccionada por el objetivo
 
 Ejemplo de extracción de datos del usuario: anyataylorjoy
 realizada el dia: 23/04/2026
-![alt text](example_scraping/instagram_anyataylorjoy_posts.xlsx)
+
+![alt text](images/snapshot_scraping.png)
